@@ -10,10 +10,13 @@ import signal
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-BLE_ADDRESS = "F83153A9-8994-8BC6-CAD9-8C2365BAA7C9"
+#BLE_ADDRESS = "F83153A9-8994-8BC6-CAD9-8C2365BAA7C9"
+#CHARACTERISTIC_UUID = "20a4a273-c214-4c18-b433-329f30ef7275"
+
+BLE_ADDRESS = "CB:86:AE:D8:28:DE"
 CHARACTERISTIC_UUID = "20a4a273-c214-4c18-b433-329f30ef7275"
 
-# Plotting configuration
+# Plotting configuration 
 dataList = []
 max_datapoints_to_display = 700
 min_buffer_uV = 150
@@ -21,14 +24,14 @@ inamp_gain = 50
 sample_rate = 256
 filters = digitalfilter.get_Biopotential_filter(order=4, cutoff=[1, 30], btype="bandpass", fs=256, output="sos")
 enable_filters = True
-write_to_file = False
-autoscale = False
+write_to_file = True
+autoscale = True
 
 current_time = datetime.now().strftime("%Y%m%d_%H%M%S")
 filename = f"OpenEarableEEG_BLE_{current_time}.csv"
 
 if write_to_file:
-    recording_file = open("./recordings/" + filename, 'w')
+    recording_file = open("./open-earable-ExG/recordings/" + filename, 'w')
     recording_file.write("time,raw_data,filtered_data\n")
 
 fig, ax = plt.subplots()

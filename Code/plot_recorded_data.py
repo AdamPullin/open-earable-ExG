@@ -29,9 +29,12 @@ def plot_recorded_data(filename, sampling_rate, drop_start_seconds=0, drop_end_s
     ax.plot(time, values)
     ax.set_xlabel('Time (s)')
     ax.set_ylabel('Voltage (µV)')
-    ax.set_title('Biopontential Data from OpenEarable EEG')
+    ax.set_title('Biopotential Data from OpenEarable EEG')
+    y_min_uV=min(data['raw_data'])
+    y_max_uV=max(data['raw_data'])
     ax.set_ylim(y_min_uV, y_max_uV)
     ax.legend()
+    
 
     # Determine x-axis tick positions
     max_time = int(time[-1])
@@ -45,6 +48,8 @@ def plot_recorded_data(filename, sampling_rate, drop_start_seconds=0, drop_end_s
     plt.tight_layout()
     plt.show()
 
-folder = 'path/to/folder'
-filename = 'filename.csv'
-plot_recorded_data(folder + filename, sampling_rate=256, drop_start_seconds=2, drop_end_seconds=10, y_min_uV=-100, y_max_uV=100, draw='filtered')
+folder = './open-earable-ExG/recordings/'
+filename = 'OpenEarableEEG_BLE_20250224_151532.csv'
+
+# Edit drop parameters in this
+plot_recorded_data(folder + filename, sampling_rate=256, drop_start_seconds=0, drop_end_seconds=0, y_min_uV=-100, y_max_uV=100, draw='filtered')

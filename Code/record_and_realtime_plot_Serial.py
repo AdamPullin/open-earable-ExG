@@ -8,7 +8,7 @@ from struct import unpack
 import sys
 
 #ser = serial.Serial("/dev/cu.usbmodem2101", 115200)
-ser = serial.Serial("/dev/cu.usbserial-020766C8", 115200)
+ser = serial.Serial("COM6", 115200)
 ser.timeout = 0  # non-blocking read
 
 # Configure parameters for plotting
@@ -23,14 +23,14 @@ inamp_gain = 50
 filters = digitalfilter.get_Biopotential_filter(order=4, cutoff=[1, 30], btype="bandpass", fs=256, output = "sos", notch=True)
 #filters = digitalfilter.get_Highpass_filter(order=4, cutoff=0.5, fs=256, output="sos")
 enable_filters = True
-write_to_file = False
+write_to_file = True
 autoscale = False
 
 current_time = datetime.now().strftime("%Y%m%d_%H%M%S")
 filename = f"OpenEarableEEG_Serial_{current_time}.csv"
 
 if write_to_file:
-    recording_file = open("./recordings/" + filename, 'w')
+    recording_file = open("./open-earable-ExG/recordings/" + filename, 'w')
     recording_file.write("time,raw_data,filtered_data\n")
 
 fig, ax = plt.subplots()
